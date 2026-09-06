@@ -208,12 +208,12 @@ export function SubEmbedPicker({ title, subEmbeds, opts, setOpts, hasOpts, defau
     const validItems = useMemo(() => new Set(subEmbeds.map(({ id }) => id)), [subEmbeds]);
 
     const selected = hasOpts ? opts.onlyEmbedIndices : defaultOpts.onlyEmbedIndices;
-    const selectedKeys = useMemo(() => new Set(selected).intersection(validItems), [selected]);
+    const selectedKeys = useMemo(() => new Set(selected).intersection(validItems), [selected, validItems]);
     const onSelectionChange = useCallback(
         (selection: Set<number> | "all") => setOpts(prev => {
             const other = prev.onlyEmbedIndices?.filter(id => !validItems.has(id)) ?? [];
             return { ...prev, onlyEmbedIndices: [...other, ...(selection === "all" ? validItems : selection)] };
-        }), [setOpts, items],
+        }), [setOpts, validItems],
     );
 
     return <Flex gap={4} flexDirection="column" key={subEmbeds[0].id}>
