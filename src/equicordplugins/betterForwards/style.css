@@ -88,13 +88,19 @@
             flex-shrink: 0;
         }
 
-        [class^="tagGroup"] > [class^="tag"] {
-            text-wrap: nowrap !important;
-            min-width: 0;
+        [class^="tagGroup"] > [class^="tagList"] {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
 
-            .vc-text-base {
-                text-overflow: ellipsis;
-                overflow: hidden;
+            & > [class^="tag"] {
+                text-wrap: nowrap !important;
+                min-width: 0;
+
+                [data-text-variant] {
+                    text-overflow: ellipsis;
+                    overflow: hidden;
+                }
             }
         }
     }
