@@ -272,11 +272,11 @@ const attachmentIcons: Partial<Record<AttachmentType, string>> = {
     PLAINTEXT_PREVIEW: "A"
 };
 
-function AttachmentIcon({ attachment, size }: { attachment: MessageAttachment; size?: string; }) {
+function AttachmentIcon({ attachment, ...props }: { attachment: MessageAttachment; size?: string; color?: string; }) {
     const Icon = useMemo(() => {
         const type = getAttachmentType(attachment, true);
         return iconsModule[(attachmentIcons[type] ?? "ImageFile") + "Icon"];
     }, [attachment]);
 
-    return Icon && <Icon size={size} color="currentColor" style={{ flexShrink: 0 }} />;
+    return Icon && <Icon style={{ flexShrink: 0 }} {...props} />;
 }
