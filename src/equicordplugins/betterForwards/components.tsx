@@ -189,7 +189,7 @@ export function EmbedPicker(props: Required<ForwardOptionsState>) {
         });
     }, [props.message]);
 
-    return embeds?.map((embed, i) => <SubEmbedPicker {...props} {...embed} key={i} />);
+    return embeds?.map(embed => <SubEmbedPicker {...props} {...embed} key={embed.subEmbeds[0].id} />);
 }
 
 interface SubEmbedPickerProps extends Required<ForwardOptionsState> {
@@ -216,7 +216,7 @@ export function SubEmbedPicker({ title, subEmbeds, opts, setOpts, hasOpts, defau
         }), [setOpts, validItems],
     );
 
-    return <Flex gap={4} flexDirection="column" key={subEmbeds[0].id}>
+    return <Flex gap={4} flexDirection="column">
         <BaseText
             size="sm"
             color="text-subtle"
