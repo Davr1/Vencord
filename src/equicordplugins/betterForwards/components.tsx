@@ -6,7 +6,7 @@
 
 import { BaseText } from "@components/BaseText";
 import { Flex } from "@components/Flex";
-import { AtIcon, RightArrow, TextIcon } from "@components/Icons";
+import { AtIcon, DiscordIconSizes, RightArrow, TextIcon } from "@components/Icons";
 import { iconsModule } from "@equicordplugins/_core/concatenatedModules";
 import { getGuildAcronym, getIntlMessage } from "@utils/discord";
 import { getUserAvatarUrl } from "@utils/misc";
@@ -114,8 +114,11 @@ export function ChannelName({ guildId, channelId, messageId }: { guildId?: strin
             );
         }
 
-        const Icon = (channel && getChannelIcon(channel)) ?? (guildId ? TextIcon : AtIcon);
-        return <Icon size="xs" color="currentColor" />;
+        const ChannelIcon = channel && getChannelIcon(channel);
+        if (ChannelIcon) return <ChannelIcon size="xs" color="currentColor" />;
+
+        const FallbackIcon = guildId ? TextIcon : AtIcon;
+        return <FallbackIcon width={DiscordIconSizes.xs} height={DiscordIconSizes.xs} />;
     }, [channel, guildId, name]);
 
     return (
